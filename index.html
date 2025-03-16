@@ -125,7 +125,7 @@
           width: 25%;
           /* height: 100%; */
           height: auto !important;
-          opacity: 0.4;
+          opacity: 1;
           border-radius: 8px;
           -webkit-border-radius: 8px;
           -moz-border-radius: 8px;
@@ -134,7 +134,7 @@
           overflow: hidden;
         }
         .mySwiper .swiper-slide-thumb-active {
-          opacity: 1;
+          opacity: 0.5;
           cursor: initial;
         }
         .swiper-button-next:after,
@@ -549,7 +549,7 @@
             const overlay = document.querySelector(".overlay");
             overlay.style.display = "block";
 
-            document.body.style.overflow = "hidden";
+            document.body.style.overflowY = "hidden";
           }
         }
       }
@@ -651,6 +651,8 @@
 
             // Меняем хэш в URL
             history.replaceState(null, "", window.location.pathname + window.location.search);
+
+            document.body.style.overflowY = "initial";
           }
         });
       });
@@ -665,6 +667,8 @@
 
         // Меняем хэш в URL
         history.replaceState(null, "", window.location.pathname + window.location.search);
+
+        document.body.style.overflowY = "initial";
       });
       // });
 
