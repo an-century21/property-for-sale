@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css" />
     <title>Агентство CENTURY 21</title>
   </head>
@@ -48,12 +49,411 @@
           <div class="map__wrap--plaque">
             <img src="img/map-plaque.png" alt="CENTURY 21" />
           </div>
-          <script
+          <!-- <script
             type="text/javascript"
             charset="utf-8"
             async
             src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Abf6842a13caf8497b45381e91649231c4d2281359570b491416d00c3a0bd8477&amp;width=100%25&amp;height=720&amp;lang=ru_RU&amp;scroll=false"
+          ></script> -->
+          <script
+            type="text/javascript"
+            charset="utf-8"
+            async
+            src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Abf6842a13caf8497b45381e91649231c4d2281359570b491416d00c3a0bd8477&amp;width=100%&amp;height=720&amp;lang=ru_RU&amp;scroll=false"
           ></script>
+        </div>
+      </section>
+
+      <!-- карточки -->
+      <!-- <button id="card1">Кнопка 1</button> -->
+      <!-- <button id="card2">Кнопка 2</button> -->
+      <!-- <a href="http://127.0.0.1:5500/slider.html#card1" id="card1" style="background-color: #000000; color: #ffffff">Подробнее об участке 1</a> -->
+      <!-- <a href="http://127.0.0.1:5500/slider.html#card2" id="card2">Подробнее об участке 2</a> -->
+
+      <style>
+        .slider {
+          padding-bottom: 40px;
+          border-bottom: 1px solid rgba(60, 60, 59, 0.1);
+          position: relative;
+        }
+        .swiper {
+          width: 100%;
+          /* height: 100%; */
+          height: auto !important;
+        }
+        .swiper-wrapper {
+          height: auto !important;
+        }
+        .swiper-slide {
+          text-align: center;
+          font-size: 18px;
+          background: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          /*  */
+          height: auto !important;
+          cursor: pointer;
+        }
+
+        /* .swiper {
+          width: 100%;
+          height: 300px;
+          margin-left: auto;
+          margin-right: auto;
+        } */
+        /* .swiper-slide {
+          background-size: cover;
+          background-position: center;
+        } */
+        .mySwiper2 {
+          height: 80%;
+          width: 100%;
+          margin-bottom: 20px;
+          border-radius: 8px;
+          -webkit-border-radius: 8px;
+          -moz-border-radius: 8px;
+          -ms-border-radius: 8px;
+          -o-border-radius: 8px;
+          overflow: hidden;
+        }
+        .mySwiper {
+          height: 20%;
+          box-sizing: border-box;
+        }
+        .mySwiper .swiper-slide {
+          width: 25%;
+          /* height: 100%; */
+          height: auto !important;
+          opacity: 0.4;
+          border-radius: 8px;
+          -webkit-border-radius: 8px;
+          -moz-border-radius: 8px;
+          -ms-border-radius: 8px;
+          -o-border-radius: 8px;
+          overflow: hidden;
+        }
+        .mySwiper .swiper-slide-thumb-active {
+          opacity: 1;
+          cursor: initial;
+        }
+        .swiper-button-next:after,
+        .swiper-rtl .swiper-button-prev:after,
+        .swiper-button-prev:after,
+        .swiper-rtl .swiper-button-next:after {
+          display: none;
+        }
+        @media (max-width: 767px) {
+          .slider {
+            padding-bottom: 30px;
+          }
+          .mySwiper2 {
+            margin-bottom: 10px;
+          }
+        }
+      </style>
+
+      <style>
+        .overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 99;
+        }
+      </style>
+
+      <div class="overlay"></div>
+
+      <div id="img-full__popup" class="img-full__popup">
+        <div class="img-full__close">
+          <img src="img/close.svg" alt="close button" />
+        </div>
+        <img class="img-full__content" id="img-full__content" />
+      </div>
+
+      <style>
+        .img-full__popup {
+          display: none;
+          position: fixed;
+          z-index: 1000;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+        }
+        .img-full__content {
+          margin: auto;
+          display: block;
+          width: 100%;
+          max-width: 100vw;
+          max-height: 100vh;
+        }
+        .img-full__close {
+          position: absolute;
+          top: 40px;
+          right: 40px;
+          width: 40px;
+          height: 40px;
+          padding: 10px;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          -o-border-radius: 50%;
+          background-color: #ffffff;
+          border: 1px solid #000000;
+          cursor: pointer;
+          transition: all 0.25s linear;
+        }
+        .img-full__close:hover {
+          filter: invert(1);
+          -webkit-filter: invert(1);
+          border: 1px solid #ffffff;
+        }
+      </style>
+
+      <section id="cardContent1" class="card">
+        <div class="card__wrap">
+          <div class="card__head">
+            <h2 class="card__title">
+              <!-- д. Филенино, д. 19 -->
+              <br />
+              <span>Московская&nbsp;обл., Шаховской&nbsp;р-н, р.п.&nbsp;Шаховская</span>
+            </h2>
+            <div class="card__close">
+              <img src="img/close.svg" alt="close button" />
+            </div>
+          </div>
+          <div class="card__gallery">
+            <!-- slider -->
+            <div class="slider">
+              <div class="swiper mySwiper2">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-1-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-2-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-3-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-4-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-5-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-6-min.jpg" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card__gallery-top--plaque">
+                <img src="img/map-plaque.png" alt="CENTURY 21" />
+              </div>
+
+              <div class="card__gallery-arrow card__gallery-arrow--right swiper-button-next">
+                <img src="img/arrow.svg" alt="21 Century" />
+              </div>
+              <div class="card__gallery-arrow card__gallery-arrow--left swiper-button-prev">
+                <img src="img/arrow.svg" alt="21 Century" />
+              </div>
+
+              <div thumbsSlider="" class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img src="img/card-1-1-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="img/card-1-2-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="img/card-1-3-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="img/card-1-4-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="img/card-1-5-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="img/card-1-6-min.jpg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- slider -->
+          </div>
+          <div class="card__description">
+            <div class="card__description-item">
+              <h4 class="card__item-title">Новорижское шоссе</h4>
+              <p class="card__item-subtitle">151 км</p>
+            </div>
+            <div class="card__description-item">
+              <h4 class="card__item-title">3.5 гектара</h4>
+              <p class="card__item-subtitle">Площадь участка</p>
+            </div>
+            <div class="card__description-item">
+              <h4 class="card__item-title">50:06:0090201:113</h4>
+              <p class="card__item-subtitle">Кадастровый номер</p>
+            </div>
+            <div class="card__description-item">
+              <h4 class="card__item-title">14 000 000 ₽</h4>
+              <p class="card__item-subtitle">40 000 ₽/сот</p>
+            </div>
+          </div>
+
+          <div class="card__info">
+            <h2 class="card__info-title">
+              <span>
+                <img src="img/description.svg" alt="" />
+              </span>
+              Описание
+            </h2>
+            <p class="card__info-txt">
+              В продаже обособленный земельный участок, вблизи деревни Филенино.
+              <br />
+              <br />
+              Участок граничит с территориями охотхозяйства, ягодной фермы и реки Жаровня.
+              <br />
+              <br />
+              Газ и электричество в доступе. Запущена процедура перевода ВРИ под дачное строительство.
+              <br />
+              <br />
+              Применение - жилая застройка или глэмпинг. Кадастровый номер 50:06:0090201:113
+              <br />
+              <br />
+              Один собственник. Оперативный показ.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!--  -->
+
+      <section id="cardContent2" class="card">
+        <div class="card__wrap">
+          <div class="card__head">
+            <h2 class="card__title">
+              д. Филенино, д. 19
+              <br />
+              <span>Московская&nbsp;обл., Шаховской&nbsp;р-н, р.п.&nbsp;Шаховская</span>
+            </h2>
+            <div class="card__close">
+              <img src="img/close.svg" alt="close button" />
+            </div>
+          </div>
+          <div class="card__gallery">
+            <!-- slider -->
+            <div class="slider">
+              <div class="swiper mySwiper2">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-1-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-2-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-3-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-4-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-5-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img class="img__full" src="img/card-1-6-min.jpg" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card__gallery-top--plaque">
+                <img src="img/map-plaque.png" alt="CENTURY 21" />
+              </div>
+
+              <div class="card__gallery-arrow card__gallery-arrow--right swiper-button-next">
+                <img src="img/arrow.svg" alt="21 Century" />
+              </div>
+              <div class="card__gallery-arrow card__gallery-arrow--left swiper-button-prev">
+                <img src="img/arrow.svg" alt="21 Century" />
+              </div>
+
+              <div thumbsSlider="" class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img src="img/card-1-1-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="img/card-1-2-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="img/card-1-3-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="img/card-1-4-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="img/card-1-5-min.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="img/card-1-6-min.jpg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- slider -->
+          </div>
+          <div class="card__description">
+            <div class="card__description-item">
+              <h4 class="card__item-title">Новорижское шоссе</h4>
+              <p class="card__item-subtitle">151 км</p>
+            </div>
+            <div class="card__description-item">
+              <h4 class="card__item-title">3.5 гектара</h4>
+              <p class="card__item-subtitle">Площадь участка</p>
+            </div>
+            <div class="card__description-item">
+              <h4 class="card__item-title">50:06:0090201:113</h4>
+              <p class="card__item-subtitle">Кадастровый номер</p>
+            </div>
+            <div class="card__description-item">
+              <h4 class="card__item-title">14 000 000 ₽</h4>
+              <p class="card__item-subtitle">40 000 ₽/сот</p>
+            </div>
+          </div>
+
+          <div class="card__info">
+            <h2 class="card__info-title">
+              <span>
+                <img src="img/description.svg" alt="" />
+              </span>
+              Описание
+            </h2>
+            <p class="card__info-txt">
+              В продаже обособленный земельный участок, вблизи деревни Филенино.
+              <br />
+              <br />
+              Участок граничит с территориями охотхозяйства, ягодной фермы и реки Жаровня.
+              <br />
+              <br />
+              Газ и электричество в доступе. Запущена процедура перевода ВРИ под дачное строительство.
+              <br />
+              <br />
+              Применение - жилая застройка или глэмпинг. Кадастровый номер 50:06:0090201:113
+              <br />
+              <br />
+              Один собственник. Оперативный показ.
+            </p>
+          </div>
         </div>
       </section>
     </main>
@@ -68,97 +468,232 @@
       </div>
     </footer>
 
-    <section class="card">
-      <div class="card__wrap">
-        <div class="card__head">
-          <h2 class="card__title">
-            д. Филенино, д. 19
-            <br />
-            <span>Московская&nbsp;обл., Шаховской&nbsp;р-н, р.п.&nbsp;Шаховская</span>
-          </h2>
-          <div class="card__close">
-            <img src="img/close.svg" alt="close button" />
-          </div>
-        </div>
-        <div class="card__gallery">
-          <div class="card__gallery-wrap">
-            <div class="card__gallery-content">
-              <div class="card__gallery-top">
-                <img src="img/card-1-1-min.jpg" alt="21 Century" />
-                <div class="card__gallery-arrow card__gallery-arrow--left">
-                  <img src="img/arrow.svg" alt="21 Century" />
-                </div>
-                <div class="card__gallery-arrow card__gallery-arrow--right">
-                  <img src="img/arrow.svg" alt="21 Century" />
-                </div>
-                <div class="card__gallery-top--plaque">
-                  <img src="img/map-plaque.png" alt="CENTURY 21" />
-                </div>
-              </div>
-              <div class="card__gallery-bot">
-                <div class="card__gallery-preview">
-                  <img src="img/card-1-1-min.jpg" alt="21 century" />
-                </div>
-                <div class="card__gallery-preview">
-                  <img src="img/card-1-2-min.jpg" alt="21 century" />
-                </div>
-                <div class="card__gallery-preview">
-                  <img src="img/card-1-3-min.jpg" alt="21 century" />
-                </div>
-                <div class="card__gallery-preview">
-                  <img src="img/card-1-4-min.jpg" alt="21 century" />
-                </div>
-                <div class="card__gallery-preview">
-                  <img src="img/card-1-5-min.jpg" alt="21 century" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-        <div class="card__description">
-          <div class="card__description-item">
-            <h4 class="card__item-title">Новорижское шоссе</h4>
-            <p class="card__item-subtitle">151 км</p>
-          </div>
-          <div class="card__description-item">
-            <h4 class="card__item-title">3.5 гектара</h4>
-            <p class="card__item-subtitle">Площадь участка</p>
-          </div>
-          <div class="card__description-item">
-            <h4 class="card__item-title">50:06:0090201:113</h4>
-            <p class="card__item-subtitle">Кадастровый номер</p>
-          </div>
-          <div class="card__description-item">
-            <h4 class="card__item-title">14 000 000 ₽</h4>
-            <p class="card__item-subtitle">40 000 ₽/сот</p>
-          </div>
-        </div>
+    <!-- Initialize Swiper -->
+    <script>
+      // var swiper = new Swiper(".mySwiper", {
+      //   spaceBetween: 5,
+      //   slidesPerView: 5,
+      //   // freeMode: true,
+      //   watchSlidesProgress: true,
+      //   breakpoints: {
+      //     375: {
+      //       spaceBetween: 5,
+      //       slidesPerView: 3.5,
+      //     },
+      //     768: {
+      //       spaceBetween: 10,
+      //       slidesPerView: 4.5,
+      //     },
+      //     1280: {
+      //       slidesPerView: 5.5,
+      //     },
+      //   },
+      // });
 
-        <div class="card__info">
-          <h2 class="card__info-title">
-            <span>
-              <img src="img/description.svg" alt="" />
-            </span>
-            Описание
-          </h2>
-          <p class="card__info-txt">
-            В продаже обособленный земельный участок, вблизи деревни Филенино.
-            <br />
-            <br />
-            Участок граничит с территориями охотхозяйства, ягодной фермы и реки Жаровня.
-            <br />
-            <br />
-            Газ и электричество в доступе. Запущена процедура перевода ВРИ под дачное строительство.
-            <br />
-            <br />
-            Применение - жилая застройка или глэмпинг. Кадастровый номер 50:06:0090201:113
-            <br />
-            <br />
-            Один собственник. Оперативный показ.
-          </p>
-        </div>
-      </div>
-    </section>
+      // var swiper2 = new Swiper(".mySwiper2", {
+      //   spaceBetween: 10,
+      //   navigation: {
+      //     nextEl: ".swiper-button-next",
+      //     prevEl: ".swiper-button-prev",
+      //   },
+      //   thumbs: {
+      //     swiper: swiper,
+      //   },
+      // });
+
+      // document.addEventListener("DOMContentLoaded", function () {
+      // function openPopup() {
+      //   if (popup && overlay) {
+      //     popup.style.display = "block";
+      //     overlay.style.display = "block";
+      //     document.body.style.overflow = "hidden"; // Блокируем прокрутку страницы
+      //   }
+      // }
+
+      // Функция для выполнения действий внутри контейнера
+      function performActionInContainer(container) {
+        // Пример действия: добавляем текст в контейнер
+        const paragraph = container.querySelector("p");
+        if (paragraph) {
+          paragraph.textContent += " - Действие выполнено!";
+        }
+
+        // Можно добавить другие действия, например, анимацию, AJAX-запросы и т.д.
+        console.log(`Действие выполнено в контейнере с id="${container.id}"`);
+      }
+
+      // Функция для показа контейнера по хэшу
+      function showContainerFromHash() {
+        // Получаем хэш из URL (например, "#card1" -> "card1")
+        const hash = window.location.hash.replace("#", "");
+
+        // Проверяем, что хэш начинается на "card"
+        if (hash.startsWith("card")) {
+          // Получаем номер карточки (например, "card1" -> "1")
+          const cardNumber = hash.replace("card", "");
+
+          // Находим соответствующий контейнер
+          const container = document.getElementById(`cardContent${cardNumber}`);
+
+          if (container) {
+            // Показываем контейнер
+            container.style.display = "block";
+
+            // Выполняем функцию внутри контейнера
+            performActionInContainer(container);
+
+            // Показываем затемненный фон
+            const overlay = document.querySelector(".overlay");
+            overlay.style.display = "block";
+
+            document.body.style.overflow = "hidden";
+          }
+        }
+      }
+
+      // Обработчик изменения хэша в URL
+      window.addEventListener("hashchange", showContainerFromHash);
+
+      // Обработчик кликов на кнопки
+      document.addEventListener("click", function (event) {
+        // Проверяем, что клик был по кнопке с id, начинающимся на "card"
+        if (event.target.id.startsWith("card")) {
+          // Получаем номер кнопки (например, "card1" -> "1")
+          const cardNumber = event.target.id.replace("card", "");
+
+          // Меняем хэш в URL
+          window.location.hash = `card${cardNumber}`;
+        }
+      });
+
+      // Показываем контейнер при загрузке страницы, если есть хэш
+      showContainerFromHash();
+
+      // Обработчик кликов на кнопки
+      // Этот основной
+      // document.addEventListener("click", function (event) {
+      //   // Проверяем, что клик был по кнопке с id, начинающимся на "card"
+      //   if (event.target.id.startsWith("card")) {
+      //     // Получаем номер кнопки (например, "card1" -> "1")
+      //     const cardNumber = event.target.id.replace("card", "");
+
+      //     // Находим соответствующий контейнер
+      //     const container = document.getElementById(`cardContent${cardNumber}`);
+
+      //     if (container) {
+      //       // Показываем контейнер
+      //       container.style.display = "block";
+
+      //       // Выполняем функцию внутри контейнера
+      //       performActionInContainer(container);
+
+      //       const overlay = document.querySelector(".overlay");
+      //       overlay.style.display = "block";
+      //     }
+      //   }
+      // });
+
+      // Функция для выполнения действий внутри контейнера
+      function performActionInContainer(container) {
+        // Пример действия: добавляем текст в контейнер
+        var swiper = new Swiper(container.querySelector(".mySwiper"), {
+          spaceBetween: 5,
+          slidesPerView: 5,
+          // freeMode: true,
+          watchSlidesProgress: true,
+          breakpoints: {
+            375: {
+              spaceBetween: 5,
+              slidesPerView: 3.5,
+            },
+            768: {
+              spaceBetween: 10,
+              slidesPerView: 4.5,
+            },
+            1280: {
+              slidesPerView: 5.5,
+            },
+          },
+        });
+
+        var swiper2 = new Swiper(container.querySelector(".mySwiper2"), {
+          spaceBetween: 10,
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          thumbs: {
+            swiper: swiper,
+          },
+        });
+
+        // Можно добавить другие действия, например, анимацию, AJAX-запросы и т.д.
+        console.log(`Действие выполнено в контейнере с id="${container.id}"`);
+      }
+      // });
+
+      // card__close
+      // document.addEventListener("DOMContentLoaded", function () {
+      const closeButtons = document.querySelectorAll(".card__close");
+
+      closeButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          // Находим ближайший элемент с классом .card
+          const container = button.closest(".card");
+          const overlay = document.querySelector(".overlay");
+
+          if (container) {
+            container.style.display = "none";
+            overlay.style.display = "none";
+
+            // Меняем хэш в URL
+            history.replaceState(null, "", window.location.pathname + window.location.search);
+          }
+        });
+      });
+
+      const overlay = document.querySelector(".overlay");
+      overlay.addEventListener("click", function () {
+        const cardsAll = document.querySelectorAll(".card");
+        cardsAll.forEach((card) => {
+          card.style.display = "none";
+        });
+        overlay.style.display = "none";
+
+        // Меняем хэш в URL
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      });
+      // });
+
+      //
+      // Получаем все изображения с классом img__full
+      var fullImages = document.querySelectorAll(".img__full");
+      var fullImagePopup = document.getElementById("img-full__popup");
+      var fullImageContent = document.getElementById("img-full__content");
+      var fullImageClose = document.querySelector(".img-full__close");
+
+      // Добавляем обработчик клика на каждое изображение
+      fullImages.forEach(function (img) {
+        img.addEventListener("click", function () {
+          fullImagePopup.style.display = "block";
+          fullImageContent.src = this.src;
+        });
+      });
+
+      // Закрываем попап при клике на кнопку закрытия
+      fullImageClose.addEventListener("click", function () {
+        fullImagePopup.style.display = "none";
+      });
+
+      // // Закрываем попап при клике вне изображения
+      // fullImagePopup.addEventListener("click", function (event) {
+      //   if (event.target === fullImagePopup) {
+      //     fullImagePopup.style.display = "none";
+      //   }
+      // });
+    </script>
   </body>
 </html>

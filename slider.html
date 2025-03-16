@@ -114,6 +114,55 @@
 
     <div class="overlay"></div>
 
+    <div id="img-full__popup" class="img-full__popup">
+      <div class="img-full__close">
+        <img src="img/close.svg" alt="close button" />
+      </div>
+      <img class="img-full__content" id="img-full__content" />
+    </div>
+
+    <style>
+      .img-full__popup {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+      }
+      .img-full__content {
+        margin: auto;
+        display: block;
+        width: 100%;
+        max-width: 100vw;
+        max-height: 100vh;
+      }
+      .img-full__close {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+        cursor: pointer;
+        transition: all 0.25s linear;
+      }
+      .img-full__close:hover {
+        filter: invert(1);
+        -webkit-filter: invert(1);
+        border: 1px solid #ffffff;
+      }
+    </style>
+
     <section id="cardContent1" class="card">
       <div class="card__wrap">
         <div class="card__head">
@@ -132,22 +181,22 @@
             <div class="swiper mySwiper2">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <img src="img/card-1-1-min.jpg" />
+                  <img class="img__full" src="img/card-1-1-min.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="img/card-1-2-min.jpg" />
+                  <img class="img__full" src="img/card-1-2-min.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="img/card-1-3-min.jpg" />
+                  <img class="img__full" src="img/card-1-3-min.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="img/card-1-4-min.jpg" />
+                  <img class="img__full" src="img/card-1-4-min.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="img/card-1-5-min.jpg" />
+                  <img class="img__full" src="img/card-1-5-min.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="img/card-1-6-min.jpg" />
+                  <img class="img__full" src="img/card-1-6-min.jpg" />
                 </div>
               </div>
             </div>
@@ -253,22 +302,22 @@
             <div class="swiper mySwiper2">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <img src="img/card-1-1-min.jpg" />
+                  <img class="img__full" src="img/card-1-1-min.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="img/card-1-2-min.jpg" />
+                  <img class="img__full" src="img/card-1-2-min.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="img/card-1-3-min.jpg" />
+                  <img class="img__full" src="img/card-1-3-min.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="img/card-1-4-min.jpg" />
+                  <img class="img__full" src="img/card-1-4-min.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="img/card-1-5-min.jpg" />
+                  <img class="img__full" src="img/card-1-5-min.jpg" />
                 </div>
                 <div class="swiper-slide">
-                  <img src="img/card-1-6-min.jpg" />
+                  <img class="img__full" src="img/card-1-6-min.jpg" />
                 </div>
               </div>
             </div>
@@ -354,8 +403,8 @@
       </div>
     </section>
 
-    <button id="card1">Кнопка 1</button>
-    <button id="card2">Кнопка 2</button>
+    <a href="http://127.0.0.1:5500/slider.html#card1" id="card1">Подробнее об участке 1</a>
+    <a href="http://127.0.0.1:5500/slider.html#card2" id="card2">Подробнее об участке 2</a>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -402,12 +451,27 @@
       //   }
       // }
 
-      // Обработчик кликов на кнопки
-      document.addEventListener("click", function (event) {
-        // Проверяем, что клик был по кнопке с id, начинающимся на "card"
-        if (event.target.id.startsWith("card")) {
-          // Получаем номер кнопки (например, "card1" -> "1")
-          const cardNumber = event.target.id.replace("card", "");
+      // Функция для выполнения действий внутри контейнера
+      function performActionInContainer(container) {
+        // Пример действия: добавляем текст в контейнер
+        const paragraph = container.querySelector("p");
+        if (paragraph) {
+          paragraph.textContent += " - Действие выполнено!";
+        }
+
+        // Можно добавить другие действия, например, анимацию, AJAX-запросы и т.д.
+        console.log(`Действие выполнено в контейнере с id="${container.id}"`);
+      }
+
+      // Функция для показа контейнера по хэшу
+      function showContainerFromHash() {
+        // Получаем хэш из URL (например, "#card1" -> "card1")
+        const hash = window.location.hash.replace("#", "");
+
+        // Проверяем, что хэш начинается на "card"
+        if (hash.startsWith("card")) {
+          // Получаем номер карточки (например, "card1" -> "1")
+          const cardNumber = hash.replace("card", "");
 
           // Находим соответствующий контейнер
           const container = document.getElementById(`cardContent${cardNumber}`);
@@ -419,11 +483,54 @@
             // Выполняем функцию внутри контейнера
             performActionInContainer(container);
 
+            // Показываем затемненный фон
             const overlay = document.querySelector(".overlay");
             overlay.style.display = "block";
           }
         }
+      }
+
+      // Обработчик изменения хэша в URL
+      window.addEventListener("hashchange", showContainerFromHash);
+
+      // Обработчик кликов на кнопки
+      document.addEventListener("click", function (event) {
+        // Проверяем, что клик был по кнопке с id, начинающимся на "card"
+        if (event.target.id.startsWith("card")) {
+          // Получаем номер кнопки (например, "card1" -> "1")
+          const cardNumber = event.target.id.replace("card", "");
+
+          // Меняем хэш в URL
+          window.location.hash = `card${cardNumber}`;
+        }
       });
+
+      // Показываем контейнер при загрузке страницы, если есть хэш
+      showContainerFromHash();
+
+      // Обработчик кликов на кнопки
+      // Этот основной
+      // document.addEventListener("click", function (event) {
+      //   // Проверяем, что клик был по кнопке с id, начинающимся на "card"
+      //   if (event.target.id.startsWith("card")) {
+      //     // Получаем номер кнопки (например, "card1" -> "1")
+      //     const cardNumber = event.target.id.replace("card", "");
+
+      //     // Находим соответствующий контейнер
+      //     const container = document.getElementById(`cardContent${cardNumber}`);
+
+      //     if (container) {
+      //       // Показываем контейнер
+      //       container.style.display = "block";
+
+      //       // Выполняем функцию внутри контейнера
+      //       performActionInContainer(container);
+
+      //       const overlay = document.querySelector(".overlay");
+      //       overlay.style.display = "block";
+      //     }
+      //   }
+      // });
 
       // Функция для выполнения действий внутри контейнера
       function performActionInContainer(container) {
@@ -477,6 +584,9 @@
           if (container) {
             container.style.display = "none";
             overlay.style.display = "none";
+
+            // Меняем хэш в URL
+            history.replaceState(null, "", window.location.pathname + window.location.search);
           }
         });
       });
@@ -488,7 +598,37 @@
           card.style.display = "none";
         });
         overlay.style.display = "none";
+
+        // Меняем хэш в URL
+        history.replaceState(null, "", window.location.pathname + window.location.search);
       });
+      // });
+
+      //
+      // Получаем все изображения с классом img__full
+      var fullImages = document.querySelectorAll(".img__full");
+      var fullImagePopup = document.getElementById("img-full__popup");
+      var fullImageContent = document.getElementById("img-full__content");
+      var fullImageClose = document.querySelector(".img-full__close");
+
+      // Добавляем обработчик клика на каждое изображение
+      fullImages.forEach(function (img) {
+        img.addEventListener("click", function () {
+          fullImagePopup.style.display = "block";
+          fullImageContent.src = this.src;
+        });
+      });
+
+      // Закрываем попап при клике на кнопку закрытия
+      fullImageClose.addEventListener("click", function () {
+        fullImagePopup.style.display = "none";
+      });
+
+      // // Закрываем попап при клике вне изображения
+      // fullImagePopup.addEventListener("click", function (event) {
+      //   if (event.target === fullImagePopup) {
+      //     fullImagePopup.style.display = "none";
+      //   }
       // });
     </script>
   </body>

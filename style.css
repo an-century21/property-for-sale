@@ -288,8 +288,10 @@
 
 /* card */
 .card {
-  position: absolute;
-  top: 30%;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
   left: 50%;
   transform: translate(-50%);
   -webkit-transform: translate(-50%);
@@ -298,6 +300,7 @@
   -o-transform: translate(-50%);
   display: none;
   z-index: 100;
+  overflow: scroll;
 }
 .card__wrap {
   max-width: 1180px;
@@ -342,8 +345,14 @@
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   background-color: #ffffff;
-  border: 1px solid #3c3b3b5c;
+  border: 1px solid #000000;
   cursor: pointer;
+  transition: all 0.25s linear;
+}
+.card__close:hover {
+  filter: invert(1);
+  -webkit-filter: invert(1);
+  border: 1px solid #ffffff;
 }
 .card__gallery-content {
   display: flex;
