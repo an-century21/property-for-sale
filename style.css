@@ -13,6 +13,7 @@
   margin: 0;
   padding: 0;
   min-width: 375px;
+  position: relative;
 }
 .body * {
   padding: 0;
@@ -287,7 +288,16 @@
 
 /* card */
 .card {
-  background-color: #3c3c3b;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%);
+  -webkit-transform: translate(-50%);
+  -moz-transform: translate(-50%);
+  -ms-transform: translate(-50%);
+  -o-transform: translate(-50%);
+  display: none;
+  z-index: 100;
 }
 .card__wrap {
   max-width: 1180px;
@@ -323,8 +333,17 @@
   color: var(--color-dark-grey);
 }
 .card__close {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid #3c3b3b5c;
+  cursor: pointer;
 }
 .card__gallery-content {
   display: flex;
@@ -357,6 +376,7 @@
   -moz-border-radius: 8px 0 14px 0;
   -ms-border-radius: 8px 0 14px 0;
   -o-border-radius: 8px 0 14px 0;
+  z-index: 101;
 }
 .card__gallery-top--plaque img {
   max-width: 100px;
@@ -392,6 +412,7 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  flex-wrap: wrap;
 }
 .card__description-item {
   padding: 20px;
@@ -402,19 +423,20 @@
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
   box-shadow: 0 20px 50px rgba(18, 17, 39, 0.08);
-  width: 100%;
+  width: 20%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 8px;
 }
 .card__item-title {
-  font-size: 18px;
+  font-size: clamp(14px, 3vw, 18px);
   font-weight: 600;
   color: var(--color-dark-grey);
 }
 .card__item-subtitle {
-  font-size: 14px;
+  font-size: clamp(12px, 3vw, 14px);
   font-weight: 400;
   color: var(--color-dark-grey);
 }
@@ -448,7 +470,49 @@
   width: 30px;
 }
 .card__info-txt {
-  font-size: 14px;
+  font-size: clamp(12px, 3vw, 14px);
   font-weight: 400;
   color: var(--color-dark-grey);
+}
+@media (max-width: 1919px) {
+  .card__description-item {
+    width: 45%;
+  }
+}
+@media (max-width: 767px) {
+  .card__wrap {
+    gap: 30px;
+  }
+  .card__gallery-content {
+    padding-bottom: 30px;
+    gap: 10px;
+  }
+  .card__close {
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+  }
+  .card__gallery-bot {
+    gap: 5px;
+  }
+  .card__gallery-arrow {
+    display: none;
+  }
+  .card__gallery-top--plaque {
+    width: 70px;
+    padding: 5px;
+  }
+  .card__description-item {
+    padding: 10px;
+  }
+  .card__info {
+    padding: 10px 10px 10px 15px;
+    gap: 15px;
+  }
+  .card__info-title span {
+    width: 20px;
+  }
+  .card__info-title {
+    padding-bottom: 15px;
+  }
 }
