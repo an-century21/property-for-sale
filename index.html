@@ -61,6 +61,7 @@
       <div class="overlay"></div>
 
       <div id="img-full__popup" class="img-full__popup">
+        <div id="img-full__overlay" class="img-full__overlay"></div>
         <div class="img-full__container">
           <div class="card__gallery-top--plaque">
             <img src="img/map-plaque.png" alt="CENTURY 21" />
@@ -1553,10 +1554,11 @@
 
       //
       // Получаем все изображения с классом img__full
-      var fullImages = document.querySelectorAll(".img__full");
-      var fullImagePopup = document.getElementById("img-full__popup");
-      var fullImageContent = document.getElementById("img-full__content");
-      var fullImageClose = document.querySelector(".img-full__close");
+      const fullImages = document.querySelectorAll(".img__full");
+      const fullImagePopup = document.getElementById("img-full__popup");
+      const fullImageOverlay = document.getElementById("img-full__overlay");
+      const fullImageContent = document.getElementById("img-full__content");
+      const fullImageClose = document.querySelector(".img-full__close");
 
       // Добавляем обработчик клика на каждое изображение
       fullImages.forEach(function (img) {
@@ -1569,8 +1571,11 @@
         });
       });
 
-      // Закрываем попап при клике на кнопку закрытия
+      // Закрываем попап при клике на кнопку закрытия или оверлей
       fullImageClose.addEventListener("click", function () {
+        fullImagePopup.style.display = "none";
+      });
+      fullImageOverlay.addEventListener("click", function () {
         fullImagePopup.style.display = "none";
       });
 

@@ -327,10 +327,20 @@
   top: 0;
   width: 100%;
   height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+}
+.img-full__overlay {
+  position: absolute;
+  z-index: 250;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 .img-full__container {
   position: fixed;
+  z-index: 300;
   top: 50vh;
   left: 50vw;
   transform: translate(-50%, -50%);
@@ -339,12 +349,14 @@
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   width: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
 }
 .img-full__content {
   margin: auto;
   display: block;
   width: 100%;
-  max-width: 100vw;
+  /* max-width: 100vw; */
   /* max-height: 100vh; */
 }
 .img-full__close {
