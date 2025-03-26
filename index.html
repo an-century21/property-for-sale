@@ -1339,46 +1339,6 @@
 
     <!-- Initialize Swiper -->
     <script>
-      // var swiper = new Swiper(".mySwiper", {
-      //   spaceBetween: 5,
-      //   slidesPerView: 5,
-      //   // freeMode: true,
-      //   watchSlidesProgress: true,
-      //   breakpoints: {
-      //     375: {
-      //       spaceBetween: 5,
-      //       slidesPerView: 3.5,
-      //     },
-      //     768: {
-      //       spaceBetween: 10,
-      //       slidesPerView: 4.5,
-      //     },
-      //     1280: {
-      //       slidesPerView: 5.5,
-      //     },
-      //   },
-      // });
-
-      // var swiper2 = new Swiper(".mySwiper2", {
-      //   spaceBetween: 10,
-      //   navigation: {
-      //     nextEl: ".swiper-button-next",
-      //     prevEl: ".swiper-button-prev",
-      //   },
-      //   thumbs: {
-      //     swiper: swiper,
-      //   },
-      // });
-
-      // document.addEventListener("DOMContentLoaded", function () {
-      // function openPopup() {
-      //   if (popup && overlay) {
-      //     popup.style.display = "block";
-      //     overlay.style.display = "block";
-      //     document.body.style.overflow = "hidden"; // Блокируем прокрутку страницы
-      //   }
-      // }
-
       // Функция для выполнения действий внутри контейнера
       function performActionInContainer(container) {
         // Пример действия: добавляем текст в контейнер
@@ -1439,33 +1399,10 @@
       // Показываем контейнер при загрузке страницы, если есть хэш
       showContainerFromHash();
 
-      // Обработчик кликов на кнопки
-      // Этот основной
-      // document.addEventListener("click", function (event) {
-      //   // Проверяем, что клик был по кнопке с id, начинающимся на "card"
-      //   if (event.target.id.startsWith("card")) {
-      //     // Получаем номер кнопки (например, "card1" -> "1")
-      //     const cardNumber = event.target.id.replace("card", "");
-
-      //     // Находим соответствующий контейнер
-      //     const container = document.getElementById(`cardContent${cardNumber}`);
-
-      //     if (container) {
-      //       // Показываем контейнер
-      //       container.style.display = "block";
-
-      //       // Выполняем функцию внутри контейнера
-      //       performActionInContainer(container);
-
-      //       const overlay = document.querySelector(".overlay");
-      //       overlay.style.display = "block";
-      //     }
-      //   }
-      // });
-
       // Функция для выполнения действий внутри контейнера
       function performActionInContainer(container) {
         // Пример действия: добавляем текст в контейнер
+
         var swiper = new Swiper(container.querySelector(".mySwiper"), {
           spaceBetween: 5,
           slidesPerView: 5,
@@ -1486,6 +1423,8 @@
           },
         });
 
+        console.log("one");
+
         var swiper2 = new Swiper(container.querySelector(".mySwiper2"), {
           spaceBetween: 10,
           navigation: {
@@ -1496,6 +1435,8 @@
             swiper: swiper,
           },
         });
+
+        console.log("two");
 
         // Можно добавить другие действия, например, анимацию, AJAX-запросы и т.д.
         console.log(`Действие выполнено в контейнере с id="${container.id}"`);
