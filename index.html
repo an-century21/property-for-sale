@@ -1393,7 +1393,26 @@
       function performActionInContainer(container) {
         // Пример действия: добавляем текст в контейнер
 
-        var swiper = new Swiper(container.querySelector(".mySwiper"), {
+        //
+        //
+        const swiperEl = container.querySelector(".mySwiper");
+        const swiper2El = container.querySelector(".mySwiper2");
+        //
+        //
+
+        //
+        //
+        if (!swiperEl || !swiper2El) {
+          console.error("Элементы слайдеров не найдены!");
+          return; // Прерываем выполнение
+        }
+        //
+        //
+
+        //
+        //
+        var swiper = new Swiper(swiperEl, {
+          // var swiper = new Swiper(container.querySelector(".mySwiper"), {
           spaceBetween: 5,
           slidesPerView: 5,
           // freeMode: true,
@@ -1411,11 +1430,15 @@
               slidesPerView: 5.5,
             },
           },
+          // });
         });
 
-        console.log("one");
+        console.log("one"); // Теперь это сработает
 
-        var swiper2 = new Swiper(container.querySelector(".mySwiper2"), {
+        //
+        //
+        var swiper2 = new Swiper(swiper2El, {
+          // var swiper2 = new Swiper(container.querySelector(".mySwiper2"), {
           spaceBetween: 10,
           navigation: {
             nextEl: ".swiper-button-next",
@@ -1424,6 +1447,7 @@
           thumbs: {
             swiper: swiper,
           },
+          // });
         });
 
         console.log("two");
