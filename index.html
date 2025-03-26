@@ -1339,7 +1339,10 @@
 
     <!-- Initialize Swiper -->
     <script>
-      // добавил 3
+      // добавил 4
+
+      // Объект для хранения экземпляров Swiper
+      const swiperInstances = {};
 
       // Функция для показа контейнера по хэшу
       function showContainerFromHash() {
@@ -1391,10 +1394,17 @@
 
       // Функция для выполнения действий внутри контейнера
       function performActionInContainer(container) {
+        // Уничтожаем старые экземпляры, если они есть
+        if (swiperInstances[container.id]) {
+          swiperInstances[container.id].swiper.destroy();
+          swiperInstances[container.id].swiper2.destroy();
+          delete swiperInstances[container.id];
+        }
+
+        // Создаем слайдер для миниатюр
         var swiper = new Swiper(container.querySelector(".mySwiper"), {
           spaceBetween: 5,
           slidesPerView: 5,
-          // freeMode: true,
           watchSlidesProgress: true,
           breakpoints: {
             375: {
@@ -1411,8 +1421,7 @@
           },
         });
 
-        console.log("one");
-
+        // Создаем основной слайдер
         var swiper2 = new Swiper(container.querySelector(".mySwiper2"), {
           spaceBetween: 10,
           navigation: {
@@ -1424,51 +1433,46 @@
           },
         });
 
-        console.log("two");
+        // Сохраняем экземпляры слайдеров
+        swiperInstances[container.id] = { swiper, swiper2 };
 
-        // Можно добавить другие действия, например, анимацию, AJAX-запросы и т.д.
+        console.log("one");
+        console.log("two");
         console.log(`Действие выполнено в контейнере с id="${container.id}"`);
       }
-      // });
 
-      // card__close
-      // document.addEventListener("DOMContentLoaded", function () {
+      // Функция для закрытия карточки
+      function closeCard(container) {
+        if (container) {
+          // Уничтожаем слайдеры, если они есть
+          if (swiperInstances[container.id]) {
+            swiperInstances[container.id].swiper.destroy();
+            swiperInstances[container.id].swiper2.destroy();
+            delete swiperInstances[container.id];
+          }
+
+          container.style.display = "none";
+          document.querySelector(".overlay").style.display = "none";
+          history.replaceState(null, "", window.location.pathname + window.location.search);
+          document.body.style.overflowY = "initial";
+        }
+      }
+
+      // Обработчики закрытия карточек
       const closeButtons = document.querySelectorAll(".card__close");
-
       closeButtons.forEach((button) => {
         button.addEventListener("click", function () {
-          // Находим ближайший элемент с классом .card
-          const container = button.closest(".card");
-          const overlay = document.querySelector(".overlay");
-
-          if (container) {
-            container.style.display = "none";
-            overlay.style.display = "none";
-
-            // Меняем хэш в URL
-            history.replaceState(null, "", window.location.pathname + window.location.search);
-
-            document.body.style.overflowY = "initial";
-          }
+          closeCard(button.closest(".card"));
         });
       });
 
       const overlay = document.querySelector(".overlay");
       overlay.addEventListener("click", function () {
-        const cardsAll = document.querySelectorAll(".card");
-        cardsAll.forEach((card) => {
-          card.style.display = "none";
+        document.querySelectorAll(".card").forEach((card) => {
+          closeCard(card);
         });
-        overlay.style.display = "none";
-
-        // Меняем хэш в URL
-        history.replaceState(null, "", window.location.pathname + window.location.search);
-
-        document.body.style.overflowY = "initial";
       });
-      // });
 
-      //
       // Получаем все изображения с классом img__full
       const fullImages = document.querySelectorAll(".img__full");
       const fullImagePopup = document.getElementById("img-full__popup");
@@ -1481,9 +1485,6 @@
         img.addEventListener("click", function () {
           fullImagePopup.style.display = "block";
           fullImageContent.src = this.src;
-
-          // Открываем новое окно с полным изображением
-          // window.open(this.src, "_blank");
         });
       });
 
@@ -1494,13 +1495,6 @@
       fullImageOverlay.addEventListener("click", function () {
         fullImagePopup.style.display = "none";
       });
-
-      // // Закрываем попап при клике вне изображения
-      // fullImagePopup.addEventListener("click", function (event) {
-      //   if (event.target === fullImagePopup) {
-      //     fullImagePopup.style.display = "none";
-      //   }
-      // });
     </script>
   </body>
 </html>
